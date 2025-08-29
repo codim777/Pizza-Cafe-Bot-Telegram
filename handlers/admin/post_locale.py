@@ -49,7 +49,7 @@ async def post_locale(message:Message,state:FSMContext):
 @router.message(StateFilter(Post_locale.finish),F.text.lower()=='back')
 async def post_locale(message:Message,state:FSMContext):
     await state.set_state(Post_locale.locale)
-    await message.answer('Set locale as follows: <b><i>country, town</i></b>',reply_markup=template('Cancel',size=(1,)))
+    await message.answer('Set locale as follows: <b><i>Country, Town</i></b>',reply_markup=template('Cancel',size=(1,)))
     await message.delete()
 
 @router.message(StateFilter(Post_locale.finish))

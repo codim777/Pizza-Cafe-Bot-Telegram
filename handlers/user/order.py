@@ -51,8 +51,8 @@ async def make_order(callback:CallbackQuery,state:FSMContext):
     qty=int(first.split(' ')[1])
     price=item.price*qty
     await callback.message.edit_media(InputMediaPhoto(media=item.image,
-            caption=f'<b>{item.name.capitalize()}: {qty}, 💰price: {price:.2f}</b>\n{item.details.capitalize()}'),
-            reply_markup=cart_inline(content=content,el=first))
+        caption=f'<b>{item.name.capitalize()}: {qty}, 💰price: {price:.2f}</b>\n{item.details.capitalize()}'),
+        reply_markup=cart_inline(content=content,el=first))
 		
 @router.callback_query(StateFilter(fsm.Order.cart),F.data.lower()=='ok')
 async def make_order(callback:CallbackQuery,state:FSMContext):
@@ -69,9 +69,9 @@ async def make_order(callback:CallbackQuery,state:FSMContext):
         price=price+item.price*int(el.split(' ')[1])
         text=text+'✅'+el.capitalize()+'\n'
     await callback.message.edit_media(InputMediaPhoto(media=FSInputFile('common/order.png'),
-            caption=f'<b>{text}💰Total price: {price:.2f}</b>'),
-            reply_markup=InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='By courier',callback_data='courier'),
-            InlineKeyboardButton(text='At cafe',callback_data='cafe'),InlineKeyboardButton(text='Menu',callback_data='menu')]]))
+        caption=f'<b>{text}💰Total price: {price:.2f}</b>'),
+        reply_markup=InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='By courier',callback_data='courier'),
+        InlineKeyboardButton(text='At cafe',callback_data='cafe'),InlineKeyboardButton(text='Menu',callback_data='menu')]]))
 
 @router.callback_query(StateFilter('*'),F.data.startswith('plus_'))
 async def make_order(callback:CallbackQuery,state:FSMContext):
@@ -97,8 +97,8 @@ async def make_order(callback:CallbackQuery,state:FSMContext):
     price=item.price*qty
     await callback.answer('')
     await callback.message.edit_media(InputMediaPhoto(media=item.image,
-            caption=f'<b>{item.name.capitalize()}: {qty}, 💰price: {price:.2f}</b>\n{item.details.capitalize()}'),
-            reply_markup=cart_inline(content=body.split(', '),el=el))
+        caption=f'<b>{item.name.capitalize()}: {qty}, 💰price: {price:.2f}</b>\n{item.details.capitalize()}'),
+        reply_markup=cart_inline(content=body.split(', '),el=el))
     
 @router.callback_query(StateFilter('*'),F.data.startswith('minus_'))
 async def make_order(callback:CallbackQuery,state:FSMContext):
@@ -212,28 +212,28 @@ async def make_order(callback:CallbackQuery,state:FSMContext):
         if data['dest'] is None:
             if data['room']=='':
                 await callback.message.edit_media(InputMediaPhoto(media=FSInputFile('common/order.png'),caption=f'<b>{text}💰Total price: {price:.2f}\n\
-                	🚩Delivery address: {data['country']}, {data['town']}, {data['street']}, {data['house']}\n☎️Contact number: {data['phone']}</b>'), 
+                🚩Delivery address: {data['country']}, {data['town']}, {data['street']}, {data['house']}\n☎️Contact number: {data['phone']}</b>'), 
                 	reply_markup=confirm_kb())
             else:
                 await callback.message.edit_media(InputMediaPhoto(media=FSInputFile('common/order.png'),caption=f'<b>{text}💰Total price: {price:.2f},\n\
-                	🚩Delivery address: {data['country']}, {data['town']}, {data['street']}, {data['house']}, {data['room']}\n\
-                    ☎️Contact number: {data['phone']}</b>'),reply_markup=confirm_kb())
+                🚩Delivery address: {data['country']}, {data['town']}, {data['street']}, {data['house']}, {data['room']}\n\
+                ☎️Contact number: {data['phone']}</b>'),reply_markup=confirm_kb())
         else:
             dest=await session.scalar(select(Dest).where(Dest.id==data['dest']))
             if dest.room=='':
                 await callback.message.edit_media(InputMediaPhoto(media=FSInputFile('common/order.png'),caption=f'<b>{text}💰Total price: {price:.2f}\n\
-                    🚩Delivery address: {dest.country}, {dest.town}, {dest.street}, {dest.house}\n☎️Contact number: {data['phone']}</b>'),
-                    reply_markup=confirm_kb())
+                🚩Delivery address: {dest.country}, {dest.town}, {dest.street}, {dest.house}\n☎️Contact number: {data['phone']}</b>'),
+                	reply_markup=confirm_kb())
             else:
                 await callback.message.edit_media(InputMediaPhoto(media=FSInputFile('common/order.png'),caption=f'<b>{text}💰Total price: {price:.2f}\n\
-                    🚩Delivery address: {dest.country}, {dest.town}, {dest.street}, {dest.house}, {dest.room}\n\
-                    ☎️Contact number: {data['phone']}</b>'),reply_markup=confirm_kb())
+                🚩Delivery address: {dest.country}, {dest.town}, {dest.street}, {dest.house}, {dest.room}\n\
+                ☎️Contact number: {data['phone']}</b>'),reply_markup=confirm_kb())
         await session.close()
     elif data['delivery']=='at cafe':
         cafe=await session.scalar(select(Cafe).where(Cafe.id==data['cafe']))
         await session.close()
         await callback.message.edit_media(InputMediaPhoto(media=FSInputFile('common/order.png'),caption=f'<b>{text}💰Total price: {price:.2f}\n\
-            🚩Delivery cafe: {cafe.country}, {cafe.town}, {cafe.street}, {cafe.house}\n☎️Contact number: {data['phone']}</b>'),
+        🚩Delivery cafe: {cafe.country}, {cafe.town}, {cafe.street}, {cafe.house}\n☎️Contact number: {data['phone']}</b>'),
             reply_markup=confirm_kb())
 
 @router.message(fsm.Order.phone,F.text)
@@ -255,28 +255,28 @@ async def make_order(message:Message,state:FSMContext):
         if data['dest'] is None:
             if data['room']=='':
                 await message.answer_photo(FSInputFile('common/order.png'),caption=f'<b>{text}💰Total price: {price:.2f}\n\
-                	🚩Delivery address: {data['country']}, {data['town']}, {data['street']}, {data['house']}\n☎️Contact number: {data['phone']}</b>', 
+                🚩Delivery address: {data['country']}, {data['town']}, {data['street']}, {data['house']}\n☎️Contact number: {data['phone']}</b>', 
                 	reply_markup=confirm_kb())
             else:
                 await message.answer_photo(FSInputFile('common/order.png'),caption=f'<b>{text}💰Total price: {price:.2f},\n\
-                	🚩Delivery address: {data['country']}, {data['town']}, {data['street']}, {data['house']}, {data['room']}\n\
-                    ☎️Contact number: {data['phone']}</b>',reply_markup=confirm_kb())
+                🚩Delivery address: {data['country']}, {data['town']}, {data['street']}, {data['house']}, {data['room']}\n\
+                ☎️Contact number: {data['phone']}</b>',reply_markup=confirm_kb())
         else:
             dest=await session.scalar(select(Dest).where(Dest.id==data['dest']))
             if dest.room=='':
                 await message.answer_photo(FSInputFile('common/order.png'),caption=f'<b>{text}💰Total price: {price:.2f}\n\
-                    🚩Delivery address: {dest.country}, {dest.town}, {dest.street}, {dest.house}\n\
-					☎️Contact number: {data['phone']}</b>',reply_markup=confirm_kb())
+                🚩Delivery address: {dest.country}, {dest.town}, {dest.street}, {dest.house}\n\
+				☎️Contact number: {data['phone']}</b>',reply_markup=confirm_kb())
             else:
                 await message.answer_photo(FSInputFile('common/order.png'),caption=f'<b>{text}💰Total price: {price:.2f}\n\
-                    🚩Delivery address: {dest.country}, {dest.town}, {dest.street}, {dest.house}, {dest.room}\n\
-                    ☎️Contact number: {data['phone']}</b>',reply_markup=confirm_kb())
+                🚩Delivery address: {dest.country}, {dest.town}, {dest.street}, {dest.house}, {dest.room}\n\
+                ☎️Contact number: {data['phone']}</b>',reply_markup=confirm_kb())
         await session.close()
     elif data['delivery']=='at cafe':
         cafe=await session.scalar(select(Cafe).where(Cafe.id==data['cafe']))
         await session.close()
         await message.answer_photo(FSInputFile('common/order.png'),caption=f'<b>{text}💰Total price: {price:.2f}\n\
-            🚩Delivery cafe: {cafe.country}, {cafe.town}, {cafe.street}, {cafe.house}\n☎️Contact number: {data['phone']}</b>',reply_markup=confirm_kb())
+        🚩Delivery cafe: {cafe.country}, {cafe.town}, {cafe.street}, {cafe.house}\n☎️Contact number: {data['phone']}</b>',reply_markup=confirm_kb())
         message.delete()
         
 @router.callback_query(StateFilter(fsm.Order.paid),F.data.lower()=='pay')
@@ -341,5 +341,5 @@ async def make_order(callback:CallbackQuery,state:FSMContext):
     await state.clear()
     await state.set_state(fsm.Menu.belong)
     await callback.message.edit_media(media=InputMediaPhoto(media=FSInputFile('common/accept.png'),
-        caption=f'Thank you. You order is accepted under ID=<b>{id}</b>'),
+        caption=f'Thank you. You order is accepted with ID=<b>{id}</b>'),
         reply_markup=InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='Menu',callback_data='menu')]]))

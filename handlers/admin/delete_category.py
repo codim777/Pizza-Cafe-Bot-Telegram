@@ -18,7 +18,7 @@ async def delete_category(message:Message,state:FSMContext):
     category=await session.scalar(select(Category).where(Category.title==message.text.lower()))
     await session.close()
     if category is None:
-        await message.answer(f'No such category. Try again',reply_markup=template('Cancel',size=(1,)))
+        await message.answer(f'No such category',reply_markup=template('Cancel',size=(1,)))
         return
     await state.update_data(title=message.text.lower())
     await state.set_state(Delete_category.finish)

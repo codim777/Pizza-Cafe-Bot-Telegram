@@ -249,23 +249,23 @@ async def set_image(message:Message,state:FSMContext):
     if len(addr)==2:
         if phone is None:
             await message.answer_photo(FSInputFile('common/order.png'),caption=f'<b>{text}💰Total price: {price:.2f}\n\
-        		🚩Address: {data['country'].capitalize()}, {data['town'].capitalize()}, {addr[0].capitalize()}, {addr[1]}</b>\nSet phone number',
+        	🚩Address: {data['country'].capitalize()}, {data['town'].capitalize()}, {addr[0].capitalize()}, {addr[1]}</b>\nSet phone number',
         		reply_markup=phone_kb())
         else:
             phones=await session.scalars(select(Phone).where(Phone.user==user.id))
             await message.answer_photo(FSInputFile('common/order.png'),caption=f'<b>{text}💰Total price: {price:.2f}\n\
-        		🚩Address: {data['country'].capitalize()}, {data['town'].capitalize()}, {addr[0].capitalize()}, {addr[1]}</b>\n\
-              	Select or set phone number',reply_markup=phones_kb(phones.all()))
+        	🚩Address: {data['country'].capitalize()}, {data['town'].capitalize()}, {addr[0].capitalize()}, {addr[1]}</b>\n\
+            Select or set phone number',reply_markup=phones_kb(phones.all()))
     else:
         if phone is None:
             await message.answer_photo(FSInputFile('common/order.png'),caption=f'<b>{text}💰Total price: {price:.2f}\n\
-        		🚩Address: {data['country'].capitalize()}, {data['town'].capitalize()}, {addr[0].capitalize()}, {addr[1]}, {addr[2]}</b>\n\
-            	Set phone number',reply_markup=phone_kb())
+        	🚩Address: {data['country'].capitalize()}, {data['town'].capitalize()}, {addr[0].capitalize()}, {addr[1]}, {addr[2]}</b>\n\
+            Set phone number',reply_markup=phone_kb())
         else:
             phones=await session.scalars(select(Phone).where(Phone.user==user.id))
             await message.answer_photo(FSInputFile('common/order.png'),caption=f'<b>{text}💰Total price: {price:.2f}\n\
-        		🚩Address: {data['country'].capitalize()}, {data['town'].capitalize()}, {addr[0].capitalize()}, {addr[1]}, {addr[2]}</b>\n\
-            	Select or set phone number',reply_markup=phones_kb(phones.all()))
+        	🚩Address: {data['country'].capitalize()}, {data['town'].capitalize()}, {addr[0].capitalize()}, {addr[1]}, {addr[2]}</b>\n\
+            Select or set phone number',reply_markup=phones_kb(phones.all()))
     await session.close()
     await message.delete()
     

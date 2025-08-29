@@ -49,7 +49,7 @@ async def post_cafe(message:Message,state:FSMContext):
 @router.message(StateFilter(Post_cafe.finish),F.text.lower()=='back')
 async def post_cafe(message:Message,state:FSMContext):
     await state.set_state(Post_cafe.cafe)
-    await message.answer('Set location as follows: <b><i>country, town, street, house</i></b>',reply_markup=template('Cancel',size=(1,)))
+    await message.answer('Set location as follows: <b><i>Country, Town, Street, house</i></b>',reply_markup=template('Cancel',size=(1,)))
     await message.delete()
 
 @router.message(StateFilter(Post_cafe.finish))

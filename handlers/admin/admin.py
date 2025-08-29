@@ -52,13 +52,13 @@ async def select_option(message:Message,state:FSMContext):
 @router.message(Post.option,F.text.lower()=='cafe')
 async def select_option(message:Message,state:FSMContext):
     await state.set_state(Post_cafe.cafe)
-    await message.answer('Set location as follows: <b><i>country, town, street, house</i></b>',reply_markup=template('Cancel',size=(1,)))
+    await message.answer('Set location as follows: <b><i>Country, Town, Street, house</i></b>',reply_markup=template('Cancel',size=(1,)))
     await message.delete()
     
 @router.message(Post.option,F.text.lower()=='locale')
 async def select_option(message:Message,state:FSMContext):
     await state.set_state(Post_locale.locale)
-    await message.answer('Set locale as follows: <b><i>country, town</i></b>',reply_markup=template('Cancel',size=(1,)))
+    await message.answer('Set locale as follows: <b><i>Country, Town</i></b>',reply_markup=template('Cancel',size=(1,)))
     await message.delete()
     
 @router.message(Update.option,F.text.lower()=='category')
@@ -76,7 +76,7 @@ async def select_option(message:Message,state:FSMContext):
 @router.message(Update.option,F.text.lower()=='cafe')
 async def select_option(message:Message,state:FSMContext):
     await state.set_state(Update_cafe.cafe)
-    await message.answer('Set location as follows: <b><i>country, town, street, house</i></b>',reply_markup=template('Cancel',size=(1,)))
+    await message.answer('Set location as follows: <b><i>Country, Town, Street, house</i></b>',reply_markup=template('Cancel',size=(1,)))
     await message.delete()
     
 @router.message(Delete.option,F.text.lower()=='category')
@@ -94,13 +94,13 @@ async def select_option(message:Message,state:FSMContext):
 @router.message(Delete.option,F.text.lower()=='cafe')
 async def select_option(message:Message,state:FSMContext):
     await state.set_state(Delete_cafe.cafe)
-    await message.answer('Set location as follows: <b><i>country, town, street, house</i></b>',reply_markup=template('Cancel',size=(1,)))
+    await message.answer('Set location as follows: <b><i>Country, Town, Street, house</i></b>',reply_markup=template('Cancel',size=(1,)))
     await message.delete()
     
 @router.message(Delete.option,F.text.lower()=='locale')
 async def select_option(message:Message,state:FSMContext):
     await state.set_state(Delete_locale.locale)
-    await message.answer('Specify locale as follows: <b><i>country, town</i></b>',reply_markup=template('Cancel',size=(1,)))
+    await message.answer('Specify locale as follows: <b><i>Country, Town</i></b>',reply_markup=template('Cancel',size=(1,)))
     await message.delete()
     
 @router.message(Delete.option,F.text.lower()=='order')

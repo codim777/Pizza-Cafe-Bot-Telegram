@@ -49,7 +49,7 @@ async def delete_cafe(message:Message,state:FSMContext):
 @router.message(StateFilter(Delete_cafe.finish),F.text.lower()=='back')
 async def delete_cafe(message:Message,state:FSMContext):
     await state.set_state(Delete_cafe.cafe)
-    await message.answer('Specify locale as follows: <b><i>country, town, street, house</i></b>',reply_markup=template('Cancel',size=(1,)))
+    await message.answer('Specify locale as follows: <b><i>Country, Town, Street, house</i></b>',reply_markup=template('Cancel',size=(1,)))
     await message.delete()
 
 @router.message(StateFilter(Delete_cafe.finish))

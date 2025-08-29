@@ -1,5 +1,5 @@
 from aiogram import Router, F
-from aiogram.types import Message, FSInputFile
+from aiogram.types import Message
 from filters.chat_filters import ChatFilter, AdminFilter
 from keyboard.keyboard import template
 from fsm.fsm import Update_item
@@ -137,5 +137,5 @@ async def update_cafe(message:Message,state:FSMContext):
 @router.message(StateFilter(Update_item.finish))
 async def post_category(message:Message,state:FSMContext):
     data=await state.get_data()
-    await message.answer(f'nUpdate: {data['prop']} = {data['value']}',reply_markup=template('Update','Back','Cancel', size=(3,)))
+    await message.answer(f'Update: {data['prop']} = {data['value']}',reply_markup=template('Update','Back','Cancel', size=(3,)))
     await message.delete()
